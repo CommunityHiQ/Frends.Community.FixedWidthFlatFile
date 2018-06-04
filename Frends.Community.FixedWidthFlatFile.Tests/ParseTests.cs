@@ -101,7 +101,7 @@ Hodor   HodorsStr 20180101 ";
         public void Parse_AddsGenericKeys_ForValuesWithoutName()
         {
             string fileContent = @"Veijo   FrendsStr 20180527 
-Hodor   HodorsStr 20180101 ";
+Hodor   HodorsStr 20180101 "+System.Environment.NewLine;
 
             var columnSpecs = new ColumnSpecification[] {
             new ColumnSpecification{Length = 8, Type = ColumnType.String, Name = "Name" },

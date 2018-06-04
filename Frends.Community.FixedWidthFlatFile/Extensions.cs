@@ -19,7 +19,9 @@ namespace Frends.Community.FixedWidthFlatFile
             string line;
             while (null != (line = reader.ReadLine()))
             {
-                allLines.Add(line);
+                //skip empty lines
+                if(!string.IsNullOrWhiteSpace(line))
+                    allLines.Add(line);
             }
 
             return allLines;
