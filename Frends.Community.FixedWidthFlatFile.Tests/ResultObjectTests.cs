@@ -66,6 +66,8 @@ firstValue    ThirdValue190315";
         {
             var parseResult = CreateResultWithEmptyValues();
 
+            Assert.IsTrue(parseResult.Data[0]["Second"] == null);
+
             var xmlResult = parseResult.ToXml();
             //check that empty XML element is created
             Assert.IsTrue(xmlResult.Contains("<Second />"));
@@ -75,6 +77,9 @@ firstValue    ThirdValue190315";
         public void ToJson_WithEmptyValues_DoesNotThrowException()
         {
             var parseResult = CreateResultWithEmptyValues();
+
+            Assert.IsTrue(parseResult.Data[0]["Second"] == null);
+
             var jsonResult = parseResult.ToJson();
             // check that empty value is set
             Assert.AreEqual(jsonResult[0]["Second"], string.Empty);
@@ -84,6 +89,9 @@ firstValue    ThirdValue190315";
         public void ToXml_WithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
+
+            Assert.IsTrue(parseResult.Data[0]["Second"] == null);
+
             var xmlResult = parseResult.ToXml();
 
             //check that empty XML element is created
@@ -94,6 +102,9 @@ firstValue    ThirdValue190315";
         public void ToJson_WithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
+
+            Assert.IsTrue(parseResult.Data[0]["Second"] == null);
+
             var jsonResult = parseResult.ToJson();
             // check that empty value is set
             Assert.AreEqual(jsonResult[0]["Second"], string.Empty);
