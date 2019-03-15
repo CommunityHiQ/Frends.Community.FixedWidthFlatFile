@@ -128,7 +128,11 @@ namespace Frends.Community.FixedWidthFlatFile
                     foreach (var key in row.Keys)
                     {
                         writer.WritePropertyName(key);
-                        writer.WriteValue(row[key]);
+                        // null check
+                        if (row[key] != null)
+                            writer.WriteValue(row[key]);
+                        else //write empty string value for null fields
+                            writer.WriteValue("");
                     }
 
                     writer.WriteEndObject(); // end row
@@ -157,10 +161,18 @@ namespace Frends.Community.FixedWidthFlatFile
 
                         foreach (var key in row.Keys)
                         {
-                            if (row[key].GetType() == typeof(DateTime))
-                                writer.WriteElementString(key, row[key].ToString("s"));
-                            else
-                                writer.WriteElementString(key, row[key].ToString());
+                            // value null check
+                            if (row[key] != null)
+                            {
+                                if (row[key].GetType() == typeof(DateTime))
+                                    writer.WriteElementString(key, row[key].ToString("s"));
+                                else
+                                    writer.WriteElementString(key, row[key].ToString());
+                            }
+                            else // write empty string for null values
+                            {
+                                writer.WriteElementString(key, "");
+                            }
                         }
 
                         writer.WriteEndElement(); // end Row
