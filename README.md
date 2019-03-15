@@ -129,3 +129,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | ----- | ----- |
 | 1.0.0 | Initial version of Fixed Width Flat File Task |
 | 1.1.0 | Fixed bug where empty rows resulted in exception |
+| 1.2.0 | Fixed bug where ToJson() and ToXml() methods failed with empty/null values |
