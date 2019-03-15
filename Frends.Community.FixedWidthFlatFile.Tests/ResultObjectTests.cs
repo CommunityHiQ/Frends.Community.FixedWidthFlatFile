@@ -1,9 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Frends.Community.FixedWidthFlatFile.Tests
 {
@@ -40,7 +35,7 @@ firstValue    ThirdValue";
         private ParseResult CreateResultWithDateValue()
         {
             string fileContent =
-                @"First;Second;Third
+                @"First;Second;Third;Date
 firstValue    ThirdValue190315";
 
             var columnSpec = new ColumnSpecification[] {
@@ -72,30 +67,36 @@ firstValue    ThirdValue190315";
             var parseResult = CreateResultWithEmptyValues();
 
             var xmlResult = parseResult.ToXml();
+            //check that empty XML element is created
+            Assert.IsTrue(xmlResult.Contains("<Second />"));
         }
 
         [TestMethod]
         public void ToJson_WithEmptyValues_DoesNotThrowException()
         {
             var parseResult = CreateResultWithEmptyValues();
-
             var jsonResult = parseResult.ToJson();
+            // check that empty value is set
+            Assert.AreEqual(jsonResult[0]["Second"], string.Empty);
         }
 
         [TestMethod]
         public void ToXml_WithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
-
             var xmlResult = parseResult.ToXml();
+
+            //check that empty XML element is created
+            Assert.IsTrue(xmlResult.Contains("<Second />"));
         }
 
         [TestMethod]
         public void ToJson_WithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
-
             var jsonResult = parseResult.ToJson();
+            // check that empty value is set
+            Assert.AreEqual(jsonResult[0]["Second"], string.Empty);
         }
 
     }
