@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Frends.Community.FixedWidthFlatFile.Tests
 {
@@ -85,11 +86,12 @@ firstValue    ThirdValue190315";
             Assert.AreEqual(jsonResult[0]["Second"], string.Empty);
         }
 
+        // Test that null check does not fail with DateTime Type values
         [TestMethod]
-        public void ToXml_WithDateTimeValue_DoesNotThrowException()
+        public void ToXml_NullCheckWithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
-
+            Assert.IsTrue(parseResult.Data[0]["Date"].GetType() == typeof(DateTime));
             Assert.IsTrue(parseResult.Data[0]["Second"] == null);
 
             var xmlResult = parseResult.ToXml();
@@ -98,11 +100,13 @@ firstValue    ThirdValue190315";
             Assert.IsTrue(xmlResult.Contains("<Second />"));
         }
 
+        // Test that null check does not fail with DateTime Type values
         [TestMethod]
-        public void ToJson_WithDateTimeValue_DoesNotThrowException()
+        public void ToJson_NullCheckWithDateTimeValue_DoesNotThrowException()
         {
             var parseResult = CreateResultWithDateValue();
 
+            Assert.IsTrue(parseResult.Data[0]["Date"].GetType() == typeof(DateTime));
             Assert.IsTrue(parseResult.Data[0]["Second"] == null);
 
             var jsonResult = parseResult.ToJson();
