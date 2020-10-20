@@ -2,19 +2,21 @@
 
 Task for parsing fixed width flat files
 
+[![Actions Status](https://github.com/CommunityHiQ/Frends.Community.FixedWidthFlatFile/workflows/PackAndPushAfterMerge/badge.svg)](https://github.com/CommunityHiQ/Frends.Community.FixedWidthFlatFile/actions) ![MyGet](https://img.shields.io/myget/frends-community/v/Frends.Community.FixedWidthFlatFile) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+
 - [Installing](#installing)
-- [Task](#tasks)
-	- [Parse](#parse)
+- [Tasks](#tasks)
+     - [FixedWidthFlatFileTask](#FixedWidthFlatFileTask)
 - [Building](#building)
 - [Contributing](#contributing)
 - [Change Log](#change-log)
 
 # Installing
 
-You can install the task via FRENDS UI Task View or you can find the nuget package from the following nuget feed
-'Insert nuget feed here'
+You can install the Task via frends UI Task View or you can find the NuGet package from the following NuGet feed
+https://www.myget.org/F/frends-community/api/v3/index.json and in Gallery view in MyGet https://www.myget.org/feed/frends-community/package/nuget/Frends.Community.FixedWidthFlatFile
 
-# Task
+# Tasks
 
 ## Parse
 
@@ -49,8 +51,7 @@ Parses fixed width flat file to object with possibility to convert to JSON and X
 | Skip rows from bottom | int | If skip rows is true, task skips the given amount of rows from end. | 3 |
 | Culture info | string | Specify the culture info to be used when parsing result to Json | 'fi-FI' |
 
-
-#### Result
+#### Returns
 
 Example fixed width input data:
 
@@ -61,7 +62,7 @@ Timestamp;User
 
 would return object with property *Data* that has one row with keys "Timestamp" and "User".
 
-You can access *Timesamp* value, for example, as follows:
+You can access *Timestamp* value, for example, as follows:
 
 ```
 #result.Data[0]["Timestamp"]
@@ -91,31 +92,28 @@ Calling *#result.ToXml()* would return:
 </Root>
 ```
 
-
 # Building
 
-Clone a copy of the repo
+Clone a copy of the repository
 
 `git clone https://github.com/CommunityHiQ/Frends.Community.FixedWidthFlatFile.git`
 
-Restore dependencies
-
-`nuget restore Frends.Community.FixedWidthFlatFile`
-
 Rebuild the project
 
-Run Tests with nunit3. Tests can be found under
+`dotnet build`
 
-`Frends.Community.FixedWidthFlatFile.Tests\bin\Release\Frends.Community.FixedWidthFlatFile.Tests.dll`
+Run tests
 
-Create a nuget package
+`dotnet test`
 
-`nuget pack nuspec/Frends.Community.FixedWidthFlatFile.nuspec`
+Create a NuGet package
+
+`dotnet pack --configuration Release`
 
 # Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-1. Fork the repo on GitHub
+1. Fork the repository on GitHub
 2. Clone the project to your own machine
 3. Commit changes to your own branch
 4. Push your work back up to your fork
@@ -130,3 +128,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.0.0 | Initial version of Fixed Width Flat File Task |
 | 1.1.0 | Fixed bug where empty rows resulted in exception |
 | 1.2.0 | Fixed bug where ToJson() and ToXml() methods failed with empty/null values |
+| 1.2.1 | Converted to support .Net Framework 4.7.1 and .Net Standard 2.0 |

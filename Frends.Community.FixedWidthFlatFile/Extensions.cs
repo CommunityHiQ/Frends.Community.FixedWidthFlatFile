@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 #pragma warning disable 1591
 
@@ -20,7 +21,7 @@ namespace Frends.Community.FixedWidthFlatFile
             while (null != (line = reader.ReadLine()))
             {
                 //skip empty lines
-                if(!string.IsNullOrWhiteSpace(line))
+                if (!string.IsNullOrWhiteSpace(line))
                     allLines.Add(line);
             }
 
@@ -31,7 +32,7 @@ namespace Frends.Community.FixedWidthFlatFile
         {
             var values = new List<string>();
 
-            foreach(var value in row.Split(new[] { delimiter }, StringSplitOptions.None))
+            foreach (var value in row.Split(new[] { delimiter }, StringSplitOptions.None))
             {
                 values.Add(value.Trim());
             }
@@ -61,7 +62,8 @@ namespace Frends.Community.FixedWidthFlatFile
                 }
 
                 return values;
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 // throw custom exception for more descriptive information
                 throw new InvalidDataException("Data row did not match column specifications.", ex);
@@ -85,5 +87,6 @@ namespace Frends.Community.FixedWidthFlatFile
             }
             dictionary.Add(key, value);
         }
+
     }
 }
