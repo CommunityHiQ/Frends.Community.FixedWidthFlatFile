@@ -1,20 +1,18 @@
-﻿using System;
+﻿#pragma warning disable 1591
+
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json.Linq;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Xml;
-
-#pragma warning disable 1591
 
 namespace Frends.Community.FixedWidthFlatFile
 {
-    public enum HeaderRowType { None, FixedWidth, Delimited}
+    public enum HeaderRowType { None, FixedWidth, Delimited }
     public enum ColumnType { String, Int, Long, Decimal, Double, Boolean, DateTime, Char }
 
     public class ParseInput
@@ -36,7 +34,7 @@ namespace Frends.Community.FixedWidthFlatFile
         /// <summary>
         /// If header row uses delimiter set it here
         /// </summary>
-        [UIHint(nameof(HeaderRow),"",HeaderRowType.Delimited)]
+        [UIHint(nameof(HeaderRow), "", HeaderRowType.Delimited)]
         [DisplayFormat(DataFormatString = "Text")]
         public string HeaderDelimiter { get; set; }
 
@@ -56,7 +54,7 @@ namespace Frends.Community.FixedWidthFlatFile
         /// Exact format of DateTime value
         /// Example: yyyy-MM-ddTHH:mm:ss
         /// </summary>
-        [UIHint(nameof(Type),"", ColumnType.DateTime)]
+        [UIHint(nameof(Type), "", ColumnType.DateTime)]
         [DisplayFormat(DataFormatString = "Text")]
         [DefaultValue("yyyy-MM-ddTHH:mm:ss")]
         public string DateTimeFormat { get; set; }

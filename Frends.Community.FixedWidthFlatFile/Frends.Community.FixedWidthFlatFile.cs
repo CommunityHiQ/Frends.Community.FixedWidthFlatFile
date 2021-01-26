@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using Microsoft.CSharp; // You can remove this if you don't need dynamic type in .NET Standard frends Tasks
 
 #pragma warning disable 1591
 
@@ -41,11 +43,11 @@ namespace Frends.Community.FixedWidthFlatFile
                     inputRows.RemoveAt(0);
                     break;
             }
-            if(headers.Count > 0)
+            if (headers.Count > 0)
             {
                 // add header values as name if not set in column specification
                 var index = 0;
-                foreach(var header in headers)
+                foreach (var header in headers)
                 {
                     if (string.IsNullOrEmpty(input.ColumnSpecifications[index].Name))
                         input.ColumnSpecifications[index].Name = header;
@@ -66,7 +68,7 @@ namespace Frends.Community.FixedWidthFlatFile
                     else
                         inputRows = inputRows.Skip(options.SkipRowsFromTop).ToList();
                 }
-                if(options.SkipRowsFromBottom > 0)
+                if (options.SkipRowsFromBottom > 0)
                 {
                     // skipping more rows that exist?
                     if (options.SkipRowsFromBottom >= inputRows.Count)
@@ -76,7 +78,7 @@ namespace Frends.Community.FixedWidthFlatFile
                 }
             }
             // process data rows
-            foreach(var dataRow in inputRows)
+            foreach (var dataRow in inputRows)
             {
                 outputData.Add(Utils.ParseDataRow(dataRow, input.ColumnSpecifications));
             }

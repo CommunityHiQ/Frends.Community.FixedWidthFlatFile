@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 #pragma warning disable 1591
 
@@ -20,7 +21,7 @@ namespace Frends.Community.FixedWidthFlatFile
                 var columnValue = rowValues[i];
                 var columnName = columnSpec.Name;
                 if (string.IsNullOrEmpty(columnName))
-                    columnName = $"Field_{i+1}";
+                    columnName = $"Field_{i + 1}";
 
                 if (string.IsNullOrWhiteSpace(columnValue))
                     parsedData.AddKeyValuePair(columnSpec.Name, null);
@@ -35,9 +36,9 @@ namespace Frends.Community.FixedWidthFlatFile
                             parsedData.AddKeyValuePair(columnName, char.Parse(columnValue));
                             break;
                         case ColumnType.DateTime:
-                            parsedData.AddKeyValuePair(columnName, string.IsNullOrEmpty(columnSpec.DateTimeFormat) ? 
+                            parsedData.AddKeyValuePair(columnName, string.IsNullOrEmpty(columnSpec.DateTimeFormat) ?
                                 DateTime.Parse(columnValue) :
-                                DateTime.ParseExact(columnValue, columnSpec.DateTimeFormat, CultureInfo.InvariantCulture)); 
+                                DateTime.ParseExact(columnValue, columnSpec.DateTimeFormat, CultureInfo.InvariantCulture));
                             break;
                         case ColumnType.Decimal:
                             parsedData.AddKeyValuePair(columnName, decimal.Parse(columnValue, columnValue.Contains(",") ? CultureInfo.GetCultureInfo("fi-FI") : CultureInfo.InvariantCulture));
@@ -59,5 +60,7 @@ namespace Frends.Community.FixedWidthFlatFile
             }
             return parsedData;
         }
+
+
     }
 }
