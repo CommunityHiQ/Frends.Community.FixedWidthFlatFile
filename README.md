@@ -129,3 +129,4 @@ NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 | 1.1.0 | Fixed bug where empty rows resulted in exception |
 | 1.2.0 | Fixed bug where ToJson() and ToXml() methods failed with empty/null values |
 | 1.3.0 | Converted to support .Net Framework 4.7.1 and .Net Standard 2.0 |
+| 1.4.0 | Added frameworks net6 & net8. Dependencies updated: System.ComponentModel.Annotations to 5.0.0, NUnit3TestAdapter to 4.6.0, Microsoft.NET.Test.Sdk to 17.12.0 |
