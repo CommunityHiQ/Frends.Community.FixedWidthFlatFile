@@ -23,9 +23,16 @@ jobs:
     - name: Pack release version of task
       run: dotnet pack --configuration Release --include-source 
       
-    - name: Push NuGet package to the (prod) feed
-      run: dotnet nuget push Frends.Community.FixedWidthFlatFile\bin\Release\Frends.Community.FixedWidthFlatFile.*.nupkg --api-key ${{ secrets.COMMUNITY_FEED_API_KEY }} --source https://www.myget.org/F/frends-community/api/v2/package
-    
+    - name: Push to Frends Community Main Feed
+      shell: bash
+      run: |
+        PACKAGE_FILE=$(find Frends.Community.FixedWidthFlatFile/bin/Release -name "*.nupkg" ! -name "*.symbols.nupkg" | head -n 1)
+        
+        curl -X POST "https://frends-fsp-cloudprod-agent.frendsapp.com/api/community-tasks/v1/push?feed_type=main" \
+          -H "x-api-key: ${{ secrets.FRENDS_COMMUNITY_TASKS_API_KEY }}" \
+          -H "Content-Type: application/octet-stream" \
+          --data-binary @"$PACKAGE_FILE"
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
