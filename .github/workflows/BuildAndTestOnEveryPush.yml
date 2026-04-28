@@ -27,7 +27,7 @@ jobs:
     - name: Push to Custom Feed
       shell: bash
       run: |
-        PACKAGE_FILE=$(find Frends.Community.FixedWidthFlatFile\bin\Release -name "*.nupkg" ! -name "*.symbols.nupkg" | head -n 1)
+        PACKAGE_FILE=$(find Frends.Community.FixedWidthFlatFile/bin/Release -name "*.nupkg" ! -name "*.symbols.nupkg" | head -n 1)
         
         curl -X POST "https://frends-fsp-cloudprod-agent.frendsapp.com/api/community-tasks/v1/push?feed_type=test" \
           -H "x-api-key: ${{ secrets.FRENDS_COMMUNITY_TASKS_API_KEY }}" \
