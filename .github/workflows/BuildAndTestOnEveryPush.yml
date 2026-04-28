@@ -25,6 +25,7 @@ jobs:
       run: dotnet pack --configuration Release --include-source
 
     - name: Push to Custom Feed
+      shell: bash
       run: |
         PACKAGE_FILE=$(find Frends.Community.FixedWidthFlatFile\bin\Release -name "*.nupkg" ! -name "*.symbols.nupkg" | head -n 1)
         
